@@ -1,6 +1,6 @@
 {
-  "name": "prolaborate-addon",
-  "version": "1.0.0",
+  "name": "my-app",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "start": "node app.js"
@@ -14,24 +14,13 @@
     "express": "^4.16.4",
     "express-hbs": "^2.1.2",
     "morgan": "^1.9.1",
-    "open": "^6.4.0",
-    "opn": "^6.0.0",
-    "pg": "^7.11.0",
+    "open": "^6.1.0",
     "sequelize": "^4.43.0",
-    "sqlite3": "^4.0.9",
+    "sqlite3": "^4.0.6",
     "tough-cookie": "^3.0.1"
   },
   "devDependencies": {
     "ngrok": "^2.3.0"
-  },
-  "description": "Congratulations! You've successfully created an Atlassian Connect App using the Express web application framework.",
-  "main": "app.js",
-  "keywords": [
-    "prolaborate-addon"
-  ],
-  "author": "rizan",
-  "license": "ISC",
-  "engines": {
-    "node": "10.16.0"
   }
 }
+

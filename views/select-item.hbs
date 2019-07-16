@@ -1,0 +1,1183 @@
+{{!< layout}}
+
+
+<div class="aui-tabs horizontal-tabs custom-dialog ac-content" role="application">
+    <input type="hidden" name="repository" id="repository" {{#if repository}} value='{{repository}}' {{/if}} />
+    <input type="hidden" name="protocol" id="protocol" {{#if protocol}} value='{{protocol}}' {{/if}} />
+    <input type="hidden" name="server" id="server" {{#if server}} value='{{server}}' {{/if}} />
+    <input type="hidden" name="port" id="port" {{#if port}} value='{{port}}' {{/if}} />
+    <input type="hidden" name="proltoken" id="proltoken" {{#if proltoken}} value='{{proltoken}}' {{/if}} />
+
+    <ul class="tabs-menu" role="tablist">
+        <li class="menu-item active-tab" role="presentation"><a href="#tabs-example-first" id="aui-uid-0" role="tab" aria-selected="true"><span class="icon-diagram"></span> Diagrams</a></li>
+        <li class="menu-item" role="presentation"><a href="#tabs-example-second" id="aui-uid-1" role="tab" aria-selected="false"><span class="icon-folder"></span>Packages</a></li>
+        <li class="menu-item" role="presentation"><a href="#tabs-example-third" id="aui-uid-2" role="tab" aria-selected="false"><span class="icon-element"></span> Elements</a></li>
+    </ul>
+    <div class="tabs-pane  item-filter-result active-pane" id="tabs-example-first" aria-labelledby="aui-uid-0" role="tabpanel" aria-hidden="false">
+        <form class="aui">
+            <div class="field-group label-name"><input class="text" placeholder="Enter diagram name and click on Find" id="diagram-name" type="text" name="text-input"></div>
+            <div class="field-group">
+                <select class="select" id="diagram-stereo-type" name="diagram-stereo-type">
+                    <option value="">Select Stereotype</option>
+                </select>
+            </div>
+            <div class="field-group">
+                <select class="select" id="diagram-type" name="diagram-type">
+                    <option value="">Diagram Type</option>
+                    <option value="Activity">Activity</option>
+                    <option value="Analysis">Analysis</option>
+                    <option value="Collaboration">Collaboration</option>
+                    <option value="Component">Component</option>
+                    <option value="CompositeStructure">CompositeStructure</option>
+                    <option value="Custom">Custom</option>
+                    <option value="Deployment">Deployment</option>
+                    <option value="InteractionOverview">InteractionOverview</option>
+                    <option value="Logical">Logical</option>
+                    <option value="Object">Object</option>
+                    <option value="Package">Package</option>
+                    <option value="Sequence">Sequence</option>
+                    <option value="Statechart">Statechart</option>
+                    <option value="Timing">Timing</option>
+                    <option value="Use Case">Use Case</option>
+                </select>
+            </div>
+            <input type="button" class="btn btn-primary btn-find" id="btn-diagram" value="Find">
+        </form>
+        <div class="filter-item">
+
+            <div class="check-item diag-check" style="display:none;">
+                <div class="check-item-content">
+                    <label class="check-wrap">Show Diagram objects in a table<input type="checkbox" id="showDiagramObjects" checked="checked"><span class="checkmark"></span></label>
+                    <div class="tooltip"><span class="tooltiptext tooltip-right dia-obj">Details of objects on the selected diagram will be shown in a table in the page.</span></div>
+                </div>
+                <div class="check-item-content">
+                    <label class="check-wrap"> Enable Prolaborate links<input type="checkbox" id="enableDiagramLink" checked="checked"><span class="checkmark"></span></label>
+                    <div class="tooltip"><span class="tooltiptext tooltip-left pro-link ">Links will be enabled on Objects. You can click on them to see their overview in Prolaborate</span></div>
+                </div>
+                <p class="Diag-count search-count">Displaying <span id="offsetCount">10</span> of  <span id="totalCount">47</span>  Records </p>
+            </div>
+
+            <div class="filter-list">
+                <div class="diag-loader dialog-loader" style="display:none;">
+                    <figure></figure>
+                </div>
+                <div class="all-item" id="Diag-Detail">
+                    <h4>Search for any EA diagrams</h4>
+                    <p>You can search for any EA diagram using their names from the connected EA model.</p>
+                </div>
+                <ul id="diagram-filter-item">
+                    <!--<li class="DiagListItem">
+                       <div class="filter-item-wrap diagramItem">
+                          <span class="icon-thumb icon-diagram"></span>
+                          <div class="list-content">
+                             <p class="item-name">Manage Users</p>
+                             <p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-user"></span> Prolaborate </p>
+                          </div>
+                          <span class="selected">Selected</span>
+                       </div>
+                       <button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-aui-trigger=""  resolved="" aria-expanded="false" aria-haspopup="true">Click me</button>
+                    </li>
+
+                    <li class="DiagListItem">
+                       <div class="filter-item-wrap diagramItem">
+                          <span class="icon-thumb icon-diagram"></span>
+                          <div class="list-content">
+                             <p class="item-name">Manage Users</p>
+                             <p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-user"></span> Prolaborate </p>
+                          </div>
+                          <span class="selected">Selected</span>
+                       </div>
+                       <button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-aui-trigger=""  resolved="" aria-expanded="false" aria-haspopup="true">Click me</button>
+                    </li>
+
+                    <li class="DiagListItem">
+                       <div class="filter-item-wrap diagramItem">
+                          <span class="icon-thumb icon-diagram"></span>
+                          <div class="list-content">
+                             <p class="item-name">Manage Users</p>
+                             <p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-user"></span> Prolaborate </p>
+                          </div>
+                          <span class="selected">Selected</span>
+                       </div>
+                       <button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-aui-trigger=""  resolved="" aria-expanded="false" aria-haspopup="true">Click me</button>
+                    </li>
+
+                    <li class="DiagListItem">
+                       <div class="filter-item-wrap diagramItem">
+                          <span class="icon-thumb icon-diagram"></span>
+                          <div class="list-content">
+                             <p class="item-name">Manage Users</p>
+                             <p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-user"></span> Prolaborate </p>
+                          </div>
+                          <span class="selected">Selected</span>
+                       </div>
+                       <button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-aui-trigger=""  resolved="" aria-expanded="false" aria-haspopup="true">Click me</button>
+                    </li>
+
+                    <li class="DiagListItem">
+                       <div class="filter-item-wrap diagramItem">
+                          <span class="icon-thumb icon-diagram"></span>
+                          <div class="list-content">
+                             <p class="item-name">Manage Users</p>
+                             <p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-user"></span> Prolaborate </p>
+                          </div>
+                          <span class="selected">Selected</span>
+                       </div>
+                       <button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-aui-trigger=""  resolved="" aria-expanded="false" aria-haspopup="true">Click me</button>
+                    </li>
+
+                    <li class="DiagListItem">
+                       <div class="filter-item-wrap diagramItem">
+                          <span class="icon-thumb icon-diagram"></span>
+                          <div class="list-content">
+                             <p class="item-name">Manage Users</p>
+                             <p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-user"></span> Prolaborate </p>
+                          </div>
+                          <span class="selected">Selected</span>
+                       </div>
+                       <button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-aui-trigger=""  resolved="" aria-expanded="false" aria-haspopup="true">Click me</button>
+                    </li>-->
+                </ul>
+                <div class="diag-more item-more" style="display:none;"> <button class="aui-button btn-primary" id="Diag-ViewMore"> View More Diagrams <span class="aui-icon aui-icon-small aui-iconfont-arrow-down-small">Insert meaningful text here for accessibility</span> </button> </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="tabs-pane item-filter-result" id="tabs-example-second" aria-labelledby="aui-uid-1" role="tabpanel" aria-hidden="true">
+        <form class="aui">
+            <div class="field-group label-name text-package"><input class="text" placeholder="Enter package name and click on Find" type="text" id="package-name" name="text-input"></div>
+            <input type="button" class="btn btn-primary btn-find" id="btn-package" value="Find">
+        </form>
+        <div class="filter-item">
+
+            <div class="check-item pkg-check" style="display:none;">
+                <div class="check-item-content">
+                    <label class="check-wrap">Show child elements<input type="checkbox" id="showPackageChildren" checked="checked"><span class="checkmark"></span></label>
+                    <div class="tooltip"><span class="tooltiptext tooltip-right dia-obj">Details of child elements of selected package will be shown in a table in the page.</span></div>
+                </div>
+                <div class="check-item-content">
+                    <label class="check-wrap"> Enable Prolaborate links<input type="checkbox" id="enablePackageChildLink" checked="checked"><span class="checkmark"></span></label>
+                    <div class="tooltip"><span class="tooltiptext tooltip-left pro-link ">Links will be enabled on Objects. You can click on them to see their overview in Prolaborate</span></div>
+                </div>
+                <p class="pkg-count search-count" style="display:none;">Displaying <span id="pkgOffsetCount">0</span> of  <span id="pkgTotalCount">0</span>  Records </p>
+            </div>
+
+            <div class="filter-list">
+                <div class="pkg-loader dialog-loader" style="display:none;">
+                    <figure></figure>
+                </div>
+                <div class="all-item" id="Pkg-Detail">
+                    <h4>Search for any EA packages</h4>
+                    <p>You can search for any EA package using their names from the connected EA model.</p>
+                </div>
+                <ul id="package-filter-item"></ul>
+                <div class="pkg-more item-more" style="display:none;"> <button class="aui-button btn-primary" id="Pkg-ViewMore"> View More packages <span class="aui-icon aui-icon-small aui-iconfont-arrow-down-small">Insert meaningful text here for accessibility</span> </button> </div>
+            </div>
+        </div>
+    </div>
+    <div class="tabs-pane item-filter-result item-element" id="tabs-example-third" aria-labelledby="aui-uid-2" role="tabpanel" aria-hidden="true">
+        <form class="aui">
+            <div class="field-group label-name"><input class="text" placeholder="Enter element name and click on Find" type="text" id="element-name" name="text-input"></div>
+            <div class="field-group">
+                <select class="select" id="element-stereo-type" name="element-stereo-type">
+                    <option value="">Select Stereotype </option>
+                </select>
+            </div>
+            <div class="field-group">
+                <select class="select" id="element-type" name="element-type">
+                    <option value="">Element Type</option>
+                    <option value="Action">Action</option>
+                    <option value="ActionPin">ActionPin</option>
+                    <option value="Activity">Activity</option>
+                    <option value="ActivityParameter">ActivityParameter</option>
+                    <option value="ActivityPartition">ActivityPartition</option>
+                    <option value="ActivityRegion">ActivityRegion</option>
+                    <option value="Actor">Actor</option>
+                    <option value="Artifact">Artifact</option>
+                    <option value="Association">Association</option>
+                    <option value="Boundary">Boundary</option>
+                    <option value="CentralBufferNode">CentralBufferNode</option>
+                    <option value="Change">Change</option>
+                    <option value="Class">Class</option>
+                    <option value="Collaboration">Collaboration</option>
+                    <option value="CollaborationOccurrence">CollaborationOccurrence</option>
+                    <option value="Comment">Comment</option>
+                    <option value="Component">Component</option>
+                    <option value="ConditionalNode">ConditionalNode</option>
+                    <option value="Constraint">Constraint</option>
+                    <option value="DataStore">DataStore</option>
+                    <option value="DataType">DataType</option>
+                    <option value="Decision">Decision</option>
+                    <option value="Defect">Defect</option>
+                    <option value="DeploymentSpecification">DeploymentSpecification</option>
+                    <option value="Device">Device</option>
+                    <option value="DiagramFrame">DiagramFrame</option>
+                    <option value="Entity">Entity</option>
+                    <option value="EntryPoint">EntryPoint</option>
+                    <option value="Enumeration">Enumeration</option>
+                    <option value="Event">Event</option>
+                    <option value="ExceptionHandler">ExceptionHandler</option>
+                    <option value="ExecutionEnvironment">ExecutionEnvironment</option>
+                    <option value="ExitPoint">ExitPoint</option>
+                    <option value="ExpansionNode">ExpansionNode</option>
+                    <option value="ExpansionRegion">ExpansionRegion</option>
+                    <option value="Feature">Feature</option>
+                    <option value="GUIElement">GUIElement</option>
+                    <option value="InformationItem">InformationItem</option>
+                    <option value="Interaction">Interaction</option>
+                    <option value="InteractionFragment">InteractionFragment</option>
+                    <option value="InteractionOccurrence">InteractionOccurrence</option>
+                    <option value="InteractionState">InteractionState</option>
+                    <option value="Interface">Interface</option>
+                    <option value="InterruptibleActivityRegion">InterruptibleActivityRegion</option>
+                    <option value="Issue">Issue</option>
+                    <option value="Label">Label</option>
+                    <option value="LoopNode">LoopNode</option>
+                    <option value="MergeNode">MergeNode</option>
+                    <option value="MessageEndpoint">MessageEndpoint</option>
+                    <option value="Node">Node</option>
+                    <option value="Note">Note</option>
+                    <option value="Object">Object</option>
+                    <option value="ObjectNode">ObjectNode</option>
+                    <option value="Package">Package</option>
+                    <option value="Parameter">Parameter</option>
+                    <option value="Part">Part</option>
+                    <option value="Port">Port</option>
+                    <option value="PrimitiveType">PrimitiveType</option>
+                    <option value="ProtocolStateMachine">ProtocolStateMachine</option>
+                    <option value="ProvidedInterface">ProvidedInterface</option>
+                    <option value="Region">Region</option>
+                    <option value="Report">Report</option>
+                    <option value="RequiredInterface">RequiredInterface</option>
+                    <option value="Requirement">Requirement</option>
+                    <option value="Risk">Risk</option>
+                    <option value="Screen">Screen</option>
+                    <option value="Sequence">Sequence</option>
+                    <option value="Signal">Signal</option>
+                    <option value="State">State</option>
+                    <option value="StateMachine">StateMachine</option>
+                    <option value="StateNode">StateNode</option>
+                    <option value="Synchronization">Synchronization</option>
+                    <option value="Task">Task</option>
+                    <option value="Test">Test</option>
+                    <option value="Text">Text</option>
+                    <option value="TimeLine">TimeLine</option>
+                    <option value="Trigger">Trigger</option>
+                    <option value="UMLDiagram">UMLDiagram</option>
+                    <option value="UseCase">UseCase</option>
+                    <option value="User">User</option>
+                </select>
+            </div>
+            <input type="button" class="btn btn-primary btn-find" id="btn-element" value="Find">
+        </form>
+        <div class="filter-item">
+
+            <div class="check-item elm-check" style="display:none;">
+                <div class="check-item-content">
+                    <label class="check-wrap">Show child elements<input type="checkbox" id="showElementChildren" checked="checked"><span class="checkmark"></span></label>
+                    <div class="tooltip"><span class="tooltiptext tooltip-right dia-obj">Details of child elements of selected element will be shown in a table in the page.</span></div>
+                </div>
+                <div class="check-item-content">
+                    <label class="check-wrap"> Enable Prolaborate links<input type="checkbox" id="enableElementChildLink" checked="checked"><span class="checkmark"></span></label>
+                    <div class="tooltip"><span class="tooltiptext tooltip-left pro-link ">Links will be enabled on Objects. You can click on them to see their overview in Prolaborate</span></div>
+                </div>
+                <p class="Elm-count search-count" style="display:none;">Displaying <span id="ElmOffsetCount">0</span> of  <span id="ElmTotalCount">0</span>  Records </p>
+            </div>
+
+            <div class="filter-list">
+                <div class="Elm-loader dialog-loader" style="display:none;">
+                    <figure></figure>
+                </div>
+                <div class="all-item" id="Elm-Detail">
+                    <h4>Search for any EA elements</h4>
+                    <p>You can search for any EA element using their names from the connected EA model.</p>
+                </div>
+                <ul id="element-filter-item"></ul>
+                <div class="Elm-more item-more" style="display:none;"> <button class="aui-button btn-primary" id="Elm-ViewMore"> View More Elements <span class="aui-icon aui-icon-small aui-iconfont-arrow-down-small">Insert meaningful text here for accessibility</span> </button> </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--To establish the cross-domain messaging bridge-->
+<!--<script src="https://connect-cdn.atl-paas.net/all.js"></script>-->
+<script src="/includes/elementview/moment/moment.min.js"></script>  
+<script>
+
+    var getQueryString = function (field, url) {
+
+        var href = url ? url : window.location.href;
+        var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+        var string = reg.exec(href);
+        return string ? string[1] : null;
+    };
+
+    var BaseURL = "";
+
+    $(document).ready(function () {
+        var EncodedBaseURL = getQueryString('xdm_e', document.location);
+        BaseURL = decodeURIComponent(EncodedBaseURL);
+        getProlBaseURL();
+        getProlaborateDiagramStereotypes();
+        getProlaborateElementStereotypes();
+
+    });
+
+    var prolBaseURL;
+    var prolToken = proltoken.value;
+    function getProlBaseURL() {
+        prolBaseURL = protocol.value + "://" + server.value
+        if (port.value != "" && port.value != 80) {
+            prolBaseURL = prolBaseURL + ":" + port.value;
+        }
+    }
+
+    function getProlaborateDiagramStereotypes() {
+
+        var ProlURL = prolBaseURL;
+        var RepId = repository.value;
+        var ProlToken = proltoken.value;
+
+        $.ajax
+            ({
+                type: "POST",
+                url: "/getdiagramstreotype",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: '{"ProlURL": "' + ProlURL + '", "RepositoryId":"' + RepId + '", "proltoken":"' + ProlToken + '", "baseURL":"' + BaseURL + '"}',
+                async: false,
+                beforeSend: function (xhr) {
+                    //xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
+                    //xhr.setRequestHeader ("X-Atlassian-Token", "no-check");
+                    //xhr.setRequestHeader ("Authorization",'JWT {{token}}');
+                },
+                success: function (response) {
+
+                    if (response != null && response.d != null && response.d.DiagramStereoTypes != null) {
+                        var DiagramStreoTypesJSON = response.d.DiagramStereoTypes;
+                        $.each(DiagramStreoTypesJSON, function (i, value) {
+                            $('#diagram-stereo-type').append($('<option>').text(value).attr('value', value));
+                        });
+
+                    }
+                },
+                error: function (xhr, errorText) {
+                    alert("err");
+                }
+            });
+
+    }
+
+    function getProlaborateElementStereotypes() {
+
+        var ProlURL = prolBaseURL;
+        var RepId = repository.value;
+        var ProlToken = proltoken.value;
+
+        $.ajax
+            ({
+                type: "POST",
+                url: "/getelementstreotype",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: '{"ProlURL": "' + ProlURL + '", "RepositoryId":"' + RepId + '", "proltoken":"' + ProlToken + '", "baseURL":"' + BaseURL + '"}',
+                async: false,
+                beforeSend: function (xhr) {
+                    //xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
+                    //xhr.setRequestHeader ("X-Atlassian-Token", "no-check");
+                    //xhr.setRequestHeader ("Authorization",'JWT {{token}}');
+                },
+                success: function (response) {
+
+                    if (response != null && response.d != null && response.d.ElementStreoTypes != null) {
+                        var ElementStreoTypesJSON = response.d.ElementStreoTypes;
+                        $.each(ElementStreoTypesJSON, function (i, value) {
+                            $('#element-stereo-type').append($('<option>').text(value).attr('value', value));
+                        });
+                    }
+                },
+                error: function (xhr, errorText) {
+                    alert("err");
+                }
+            });
+
+    }
+
+    // Diagram Filter Section
+    var DiagramName;
+    var DiagramType;
+    var DiagramStreotype;
+    var PackageName;
+    var ElementName;
+    var ElementType;
+    var ElementStreotype;
+
+    var ProlURL = "";
+    var RepId = "";
+    var ProlToken = "";
+
+    //Event for Find button on diagram tab
+    $("#btn-diagram").click(function () {
+
+        ProlURL = prolBaseURL;
+        RepId = repository.value;
+        ProlToken = proltoken.value;
+
+        DiagramName = $('#diagram-name').val();
+        DiagramType = $("#diagram-type").val();
+        DiagramStreotype = $("#diagram-stereo-type").val();
+
+        $('.check-item.diag-check').hide();
+        $('#Diag-Detail').hide();
+        $('.diag-loader').show()
+        $('.diag-more').hide();
+        $('#diagram-filter-item').html("");//Reset List
+
+        $.ajax
+            ({
+                type: "POST",
+                url: "/getdiagramlist",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: '{"ProlURL": "' + ProlURL + '", "RepositoryId":"' + RepId + '", "DiagramName": "' + DiagramName + '", "Author":"", "Type": "' + DiagramType + '", "Stereotype":"' + DiagramStreotype + '", "limit":10,"startIndex":0, "proltoken":"' + ProlToken + '", "baseURL":"' + BaseURL + '"}',
+                async: false,
+                beforeSend: function (xhr) {
+                    //xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
+                    //xhr.setRequestHeader ("X-Atlassian-Token", "no-check");
+                    //xhr.setRequestHeader ("Authorization",'JWT {{token}}');
+                },
+                success: function (response) {
+                    if (response.d.status == "success") {
+
+                        $('#totalCount').text(response.d.DiagramCount);
+                        $('#offsetCount').text(response.d.DiagramList.length);
+
+                        $('.check-item.diag-check').show();
+
+                        if ($('#totalCount').text() == $('#offsetCount').text()) {
+                            $('.diag-more').hide();
+                        }
+                        else { $('.diag-more').show(); }
+
+                        var DiagramStreoTypesJSON = response.d.DiagramList;
+
+                        if (response.d.DiagramList.length > 0) {
+                            $.each(DiagramStreoTypesJSON, function (i, value) {
+
+                                var FQPath = '';
+                                if (value.PackageQualifiedName == '' & value.ElementQualifiedName == '') {
+                                    FQPath = '';
+                                } else {
+                                    if (value.PackageQualifiedName != '') { FQPath = value.PackageQualifiedName; }
+                                    if (value.ElementQualifiedName != '') { FQPath += '->' + value.ElementQualifiedName; }
+                                }
+
+                                //Generate
+                                var itemDiagram = $(
+                                    '<li id="diag_' + value.Guid + '" class="DiagListItem">' +
+                                    '<div class="filter-item-wrap diagramItem" data-guid="' + value.Guid + '">' +
+                                    '<span class="icon-thumb icon-diagram"></span>' +
+                                    '<div class="list-content">' +
+                                    '<p class="item-name">' + value.Name + '</p>' +
+                                    '<p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-user"></span> ' + value.Author + ' </p>' +
+                                    '</div>' +
+                                    '<span class="selected">Selected</span>' +
+                                    '</div>' +
+                                    '<button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-module="Diagram" data-name="' + value.Name + '" data-path="' + FQPath + '" data-author="' + value.Author + '" data-stereotype="' + value.Stereotype + '" data-date="' + moment(value.Modified).format("DD/MM/YYYY") + '">Click me</button>' +
+                                    '</li>');
+                                $('#diagram-filter-item').append(itemDiagram);
+
+                            });
+                        }
+                        else {
+                            $('.check-item.diag-check').hide();
+                            var NoResult = '<div class="no-result"><figure class="graphy-nosearch"></figure><h3>No Results</h3><p>We searched far and wide but couldn’t find any objects matching your search.</p></div>'
+                            $('#diagram-filter-item').append(NoResult);
+                        }
+                        $('.diag-loader').hide()
+
+                    }
+
+                    else {
+                        $('.diag-loader').hide()
+                        $('.check-item.diag-check').hide();
+                        var NoResult = '<div class="no-result"><figure class="graphy-nosearch"></figure><h3>No Results</h3><p>We searched far and wide but couldn’t find any objects matching your search.</p></div>';
+                        $('#diagram-filter-item').append(NoResult);
+                    }
+                },
+                error: function (xhr, errorText) {
+                    alert(errorText);
+                }
+            });
+
+    });
+
+    //Diagram tab view more event
+    $('#Diag-ViewMore').click(function () {
+
+        ProlURL = prolBaseURL;
+        RepId = repository.value;
+        ProlToken = proltoken.value;
+
+        DiagramName = $('#diagram-name').val();
+        DiagramType = $("#diagram-type").val();
+        DiagramStreotype = $("#diagram-stereo-type").val();
+
+        if ($('.DiagListItem').length > 0) {
+
+            var offsetCount = $('.DiagListItem').length;
+
+            $.ajax
+                ({
+                    type: "POST",
+                    url: "/getdiagramlist",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: '{"ProlURL": "' + ProlURL + '", "RepositoryId":"' + RepId + '", "DiagramName": "' + DiagramName + '", "Author":"", "Type": "' + DiagramType + '", "Stereotype":"' + DiagramStreotype + '", "limit":10,"startIndex":"' + offsetCount + '", "proltoken":"' + ProlToken + '", "baseURL":"' + BaseURL + '"}',
+                    async: false,
+                    beforeSend: function (xhr) {
+                        //xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
+                        //xhr.setRequestHeader ("X-Atlassian-Token", "no-check");
+                        //xhr.setRequestHeader ("Authorization",'JWT {{token}}');
+                    },
+                    success: function (response) {
+                        if (response.d.status == "success") {
+
+                            $('#totalCount').text(response.d.DiagramCount);
+                            $('#offsetCount').text(Number(offsetCount) + Number(response.d.DiagramList.length));
+
+                            $('.Diag-count').show();
+                            $('#Diag-Detail').hide();
+
+                            if ($('#totalCount').text() == $('#offsetCount').text()) {
+                                $('.diag-more').hide();
+                            }
+                            else { $('.diag-more').show(); }
+
+                            var DiagramStreoTypesJSON = response.d.DiagramList;
+
+                            $.each(DiagramStreoTypesJSON, function (i, value) {
+
+                                var FQPath = '';
+                                if (value.PackageQualifiedName == '' & value.ElementQualifiedName == '') {
+                                    FQPath = '';
+                                } else {
+                                    if (value.PackageQualifiedName != '') { FQPath = value.PackageQualifiedName; }
+                                    if (value.ElementQualifiedName != '') { FQPath += '->' + value.ElementQualifiedName; }
+                                }
+
+                                //Generate
+                                var itemDiagram = $(
+                                    '<li id="diag_' + value.Guid + '" class="DiagListItem">' +
+                                    '<div class="filter-item-wrap diagramItem" data-guid="' + value.Guid + '">' +
+                                    '<span class="icon-thumb icon-diagram"></span>' +
+                                    '<div class="list-content">' +
+                                    '<p class="item-name">' + value.Name + '</p>' +
+                                    '<p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-user"></span> ' + value.Author + ' </p>' +
+                                    '</div>' +
+                                    '<span class="selected">Selected</span>' +
+                                    '</div>' +
+                                    '<button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-module="Diagram" data-name="' + value.Name + '" data-path="' + FQPath + '" data-author="' + value.Author + '" data-stereotype="' + value.Stereotype + '" data-date="' + moment(value.Modified).format("DD/MM/YYYY") + '">Click me</button>' +
+                                    '</li>');
+                                $('#diagram-filter-item').append(itemDiagram);
+
+                            });
+
+                        }
+                    },
+                    error: function (xhr, errorText) {
+                        alert(errorText);
+                    }
+                });
+        }
+    });
+
+    //Event for Find button on Package tab
+    $("#btn-package").click(function () {
+
+        ProlURL = prolBaseURL;
+        RepId = repository.value;
+        ProlToken = proltoken.value;
+
+        $('.check-item.pkg-check').hide();
+        $('.pkg-count').hide();
+        $('#Pkg-Detail').hide();
+        $('.pkg-loader').show()
+        $('#package-filter-item').html("");//Reset List	
+
+        PackageName = $('#package-name').val();
+
+        $.ajax
+            ({
+                type: "POST",
+                url: "/getpackagelist",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: '{"ProlURL": "' + ProlURL + '", "RepositoryId":"' + RepId + '", "PackageName": "' + PackageName + '", "limit":10,"startIndex":0, "proltoken":"' + ProlToken + '", "baseURL":"' + BaseURL + '"}',
+                async: false,
+                beforeSend: function (xhr) {
+                    //xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
+                    //xhr.setRequestHeader ("X-Atlassian-Token", "no-check");
+                    //xhr.setRequestHeader ("Authorization",'JWT {{token}}');
+                },
+                success: function (response) {
+
+                    if (response.d.status == "success") {
+                        $('#pkgTotalCount').text(response.d.PackageCount);
+                        $('#pkgOffsetCount').text(response.d.Packages.length);
+
+                        $('.check-item.pkg-check').show();
+
+                        $('.pkg-more').show();
+                        $('.pkg-count').show();
+
+                        if ($('#pkgTotalCount').text() == $('#pkgOffsetCount').text()) { $('.pkg-more').hide(); }
+                        else { $('.pkg-more').show(); }
+
+                        var PackagesJSON = response.d.Packages;
+
+                        if (response.d.Packages.length > 0) {
+                            $.each(PackagesJSON, function (i, value) {
+
+                                var FQPath = '';
+                                if (value.PackageQualifiedName == '' & value.ElementQualifiedName == '') {
+                                    FQPath = '';
+                                } else {
+                                    if (value.PackageQualifiedName != '') { FQPath = value.PackageQualifiedName; }
+                                    if (value.ElementQualifiedName != '') { FQPath += '->' + value.ElementQualifiedName; }
+                                }
+
+                                //Generate
+                                var itemPackage = $(
+
+                                    '<li id="pkg_' + value.Guid + '" class ="PkgListItem"> ' +
+                                    ' <div class="filter-item-wrap packageItem" data-guid="' + value.Guid + '">' +
+                                    '<span class="icon-thumb icon-folder"></span>' +
+                                    '<div class="list-content"> <p class="item-name">' + value.Name +
+                                    '</p> <p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-person"></span>' + value.Author + '</p>' +
+                                    '</div>' +
+                                    '<span class="selected">Selected</span>' +
+                                    '</div>' +
+                                    '<button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-module="Package" data-name="' + value.Name + '" data-path="' + FQPath + '" data-author="' + value.Author + '" data-stereotype="' + value.Stereotype + '" data-date="' + moment(value.Modified).format("DD/MM/YYYY") + '">Click me</button>' +
+                                    '</li>'
+                                );
+                                $('#package-filter-item').append(itemPackage);
+
+                            });
+                        }
+                        else {
+                            $('.check-item.pkg-check').hide();
+                            $('.pkg-count').hide();
+                            var NoResult = '<div class="no-result"><figure class="graphy-nosearch"></figure><h3>No Results</h3><p>We searched far and wide but couldn’t find any objects matching your search.</p></div>'
+                            $('#package-filter-item').append(NoResult);
+                        }
+                        $('.pkg-loader').hide();
+                    }
+                    else {
+                        $('.check-item.pkg-check').hide();
+                        $('.pkg-loader').hide();
+                        $('.pkg-count').hide();
+                        var NoResult = '<div class="no-result"><figure class="graphy-nosearch"></figure><h3>No Results</h3><p>We searched far and wide but couldn’t find any objects matching your search.</p></div>'
+                        $('#package-filter-item').append(NoResult);
+                    }
+                },
+                error: function (xhr, errorText) {
+                    alert("err");
+                }
+            });
+
+    });
+
+    //Package tab view more event
+    $('#Pkg-ViewMore').click(function () {
+
+        ProlURL = prolBaseURL;
+        RepId = repository.value;
+        ProlToken = proltoken.value;
+
+        if ($('.PkgListItem').length > 0) {
+
+            var offsetCount = $('.PkgListItem').length;
+
+            $.ajax
+                ({
+                    type: "POST",
+                    url: "/getpackagelist",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: '{"ProlURL": "' + ProlURL + '", "RepositoryId":"' + RepId + '", "PackageName": "' + PackageName + '", "limit":10,"startIndex":"' + offsetCount + '", "proltoken":"' + ProlToken + '", "baseURL":"' + BaseURL + '"}',
+                    async: false,
+                    beforeSend: function (xhr) {
+                        //xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
+                        //xhr.setRequestHeader ("X-Atlassian-Token", "no-check");
+                        //xhr.setRequestHeader ("Authorization",'JWT {{token}}');
+                    },
+                    success: function (response) {
+
+                        if (response.d.status == "success") {
+
+                            $('#pkgTotalCount').text(response.d.PackageCount);
+                            $('#pkgOffsetCount').text(Number(offsetCount) + Number(response.d.Packages.length));
+
+                            $('.pkg-count').show();
+                            $('#Pkg-Detail').hide();
+
+                            if ($('#pkgTotalCount').text() == $('#pkgOffsetCount').text()) { $('.pkg-more').hide(); }
+                            else { $('.pkg-more').show(); }
+
+                            var PackagesJSON = response.d.Packages;
+
+                            if (response.d.Packages.length > 0) {
+                                $.each(PackagesJSON, function (i, value) {
+
+                                    var FQPath = '';
+                                    if (value.PackageQualifiedName == '' & value.ElementQualifiedName == '') {
+                                        FQPath = '';
+                                    } else {
+                                        if (value.PackageQualifiedName != '') { FQPath = value.PackageQualifiedName; }
+                                        if (value.ElementQualifiedName != '') { FQPath += '->' + value.ElementQualifiedName; }
+                                    }
+
+                                    //Generate
+                                    var itemPackage = $(
+
+                                        '<li id="pkg_' + value.Guid + '" class ="PkgListItem"> ' +
+                                        ' <div class="filter-item-wrap packageItem" data-guid="' + value.Guid + '">' +
+                                        '<span class="icon-thumb icon-folder"></span>' +
+                                        '<div class="list-content"> <p class="item-name">' + value.Name +
+                                        '</p> <p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-person"></span>' + value.Author + '</p>' +
+                                        '</div>' +
+                                        '<span class="selected">Selected</span>' +
+                                        '</div>' +
+                                        '<button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-module="Package" data-name="' + value.Name + '" data-path="' + FQPath + '" data-author="' + value.Author + '" data-stereotype="' + value.Stereotype + '" data-date="' + moment(value.Modified).format("DD/MM/YYYY") + '">Click me</button>' +
+                                        '</li>'
+                                    );
+                                    $('#package-filter-item').append(itemPackage);
+
+                                });
+                            }
+                            else {
+
+                            }
+                        }
+                        else {
+
+                        }
+                    },
+                    error: function (xhr, errorText) {
+                        alert("err");
+                    }
+                });
+        }
+    });
+
+    //Event for Find button on Element tab
+    $("#btn-element").click(function () {
+
+        ProlURL = prolBaseURL;
+        RepId = repository.value;
+        ProlToken = proltoken.value;
+
+        $('.check-item.elm-check').hide();
+        $('.Elm-count').hide();
+        $('#Elm-Detail').hide();
+        $('.Elm-loader').show()
+        $('#element-filter-item').html("");//Reset List	
+
+        ElementName = $('#element-name').val();
+        ElementType = $("#element-type").val();
+        ElementStreotype = $("#element-stereo-type").val();
+
+        $.ajax
+            ({
+                type: "POST",
+                url: "/getelementlist",
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                data: '{"ProlURL": "' + ProlURL + '", "RepositoryId":"' + RepId + '", "ElementName": "' + ElementName + '", "Author":"", "Type": "' + ElementType + '", "Stereotype":"' + ElementStreotype + '", "limit":10,"startIndex":0, "proltoken":"' + ProlToken + '", "baseURL":"' + BaseURL + '"}',
+                async: false,
+                beforeSend: function (xhr) {
+                    //xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
+                    //xhr.setRequestHeader ("X-Atlassian-Token", "no-check");
+                    //xhr.setRequestHeader ("Authorization",'JWT {{token}}');
+                },
+                success: function (response) {
+                    if (response.d.status == "success") {
+                        $('#ElmTotalCount').text(response.d.ElementCount);
+                        $('#ElmOffsetCount').text(response.d.Elements.length);
+
+                        $('.check-item.elm-check').show();
+
+                        $('.Elm-count').show();
+
+                        $('.Diag-count').show();
+                        $('#Diag-Detail').hide();
+
+                        if ($('#ElmTotalCount').text() == $('#ElmOffsetCount').text()) {
+                            $('.Elm-more').hide();
+                        }
+                        else { $('.Elm-more').show(); }
+
+                        var ElementsJSON = response.d.Elements;
+                        if (response.d.Elements.length > 0) {
+                            $.each(ElementsJSON, function (i, value) {
+
+                                var FQPath = '';
+                                if (value.PackageQualifiedName == '' & value.ElementQualifiedName == '') {
+                                    FQPath = '';
+                                } else {
+                                    if (value.PackageQualifiedName != '') { FQPath = value.PackageQualifiedName; }
+                                    if (value.ElementQualifiedName != '') { FQPath += '->' + value.ElementQualifiedName; }
+                                }
+
+                                //Generate
+                                var itemElement = $(
+                                    '<li id="pkg_' + value.Guid + '" class ="ElmListItem"> ' +
+                                    ' <div class="filter-item-wrap elementItem" data-guid="' + value.Guid + '">' +
+                                    '<span class="icon-thumb icon-element"></span>' +
+                                    '<div class="list-content"><p class="item-name">' + value.Name + '</p>' +
+                                    '<p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-person"></span> ' + value.Author + '</p>' +
+                                    '</div >' +
+                                    '<span class="selected">Selected</span> ' +
+                                    '</div>' +
+                                    '<button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-module="Element" data-name="' + value.Name + '" data-path="' + FQPath + '" data-author="' + value.Author + '" data-stereotype="' + value.Stereotype + '" data-date="' + moment(value.Modified).format("DD/MM/YYYY") + '">Click me</button>' +
+                                    '<aui-inline-dialog id="pop_' + value.Guid + '" class="info-wrap">' +
+                                    '</li>');
+                                $('#element-filter-item').append(itemElement);
+
+                            });
+                        }
+                        else {
+                            $('.check-item.elm-check').hide();
+                            $('.Elm-count').hide();
+                            var NoResult = '<div class="no-result"><figure class="graphy-nosearch"></figure><h3>No Results</h3><p>We searched far and wide but couldn’t find any objects matching your search.</p></div>'
+                            $('#element-filter-item').append(NoResult);
+                        }
+                        $('.Elm-loader').hide()
+                    }
+                    else {
+                        $('.check-item.elm-check').hide();
+                        $('.Elm-loader').hide();
+                        $('.Elm-count').hide();
+                        var NoResult = '<div class="no-result"><figure class="graphy-nosearch"></figure><h3>No Results</h3><p>We searched far and wide but couldn’t find any objects matching your search.</p></div>'
+                        $('#element-filter-item').append(NoResult);
+                    }
+                },
+                error: function (xhr, errorText) {
+                    alert("err");
+                }
+            });
+
+    });
+
+    //Element tab view more event
+    $('#Elm-ViewMore').click(function () {
+
+        ProlURL = prolBaseURL;
+        RepId = repository.value;
+        ProlToken = proltoken.value;
+
+        if ($('.ElmListItem').length > 0) {
+
+            var offsetCount = $('.ElmListItem').length;
+            $.ajax
+                ({
+                    type: "POST",
+                    url: "/getelementlist",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: '{"ProlURL": "' + ProlURL + '", "RepositoryId":"' + RepId + '", "ElementName": "' + ElementName + '", "Author":"", "Type": "' + ElementType + '", "Stereotype":"' + ElementStreotype + '", "limit":10,"startIndex":"' + offsetCount + '", "proltoken":"' + ProlToken + '", "baseURL":"' + BaseURL + '"}',
+                    async: false,
+                    beforeSend: function (xhr) {
+                        //xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
+                        //xhr.setRequestHeader ("X-Atlassian-Token", "no-check");
+                        //xhr.setRequestHeader ("Authorization",'JWT {{token}}');
+                    },
+                    success: function (response) {
+                        if (response.d.status == "success") {
+
+                            $('#ElmTotalCount').text(response.d.ElementCount);
+                            $('#ElmOffsetCount').text(Number(offsetCount) + Number(response.d.Elements.length));
+
+                            $('.Elm-count').show();
+                            $('#Elm-Detail').hide();
+
+                            if ($('#ElmTotalCount').text() == $('#ElmOffsetCount').text()) {
+                                $('.Elm-more').hide();
+                            }
+                            else { $('.Elm-more').show(); }
+
+                            var ElementsJSON = response.d.Elements;
+
+                            if (response.d.Elements.length > 0) {
+                                $.each(ElementsJSON, function (i, value) {
+
+                                    var FQPath = '';
+                                    if (value.PackageQualifiedName == '' & value.ElementQualifiedName == '') {
+                                        FQPath = '';
+                                    } else {
+                                        if (value.PackageQualifiedName != '') { FQPath = value.PackageQualifiedName; }
+                                        if (value.ElementQualifiedName != '') { FQPath += '->' + value.ElementQualifiedName; }
+                                    }
+
+                                    //Generate
+                                    var itemElement = $(
+                                        '<li id="pkg_' + value.Guid + '" class ="ElmListItem"> ' +
+                                        ' <div class="filter-item-wrap elementItem" data-guid="' + value.Guid + '">' +
+                                        '<span class="icon-thumb icon-element"></span>' +
+                                        '<div class="list-content"><p class="item-name">' + value.Name + '</p>' +
+                                        '<p class="item-author"><span class="aui-icon aui-icon-small aui-iconfont-person"></span> ' + value.Author + '</p>' +
+                                        '</div >' +
+                                        '<span class="selected">Selected</span> ' +
+                                        '</div>' +
+                                        '<button class="item-info aui-icon aui-icon-small aui-iconfont-info" data-module="Element" data-name="' + value.Name + '" data-path="' + FQPath + '" data-author="' + value.Author + '" data-stereotype="' + value.Stereotype + '" data-date="' + moment(value.Modified).format("DD/MM/YYYY") + '">Click me</button>' +
+                                        '<aui-inline-dialog id="pop_' + value.Guid + '" class="info-wrap">' +
+                                        '</li>');
+                                    $('#element-filter-item').append(itemElement);
+
+                                });
+                            }
+                            else {
+
+                            }
+                        }
+                        else {
+
+                        }
+                    },
+                    error: function (xhr, errorText) {
+                        alert("err");
+                    }
+                });
+
+        }
+    });
+
+    function replaceAll(str, find, replace) {
+        return str.replace(new RegExp(find, 'g'), replace);
+    }
+
+    //  Hardcoded URL for demonstrative purposes.
+    var Macrodata = {
+        "body": {
+
+            "Name": "Name",
+            "Type": "Diagram",
+            "Guid": "Guid",
+            "ShowChildren": "ShowChildren",
+            "EnableLink": "EnableLink"
+
+        }
+
+    };
+
+    function getMacroData() {
+
+        var curTab = $('.menu-item.active-tab a').attr("id");
+        switch (curTab) {
+            case "aui-uid-0":
+
+                if ($('.diagramItem.dialog-active').length > 0) {
+
+                    var diagramName = $('.diagramItem.dialog-active').find('p.item-name').text();
+                    var selectedGuid = $('.diagramItem.dialog-active').attr('data-guid');
+                    selectedGuid = selectedGuid.substring(1, 37);
+                    var ShowChildrenVal = "1";
+                    if ($("#showDiagramObjects").is(':checked')) {
+                        ShowChildrenVal = "1";
+                    }
+                    else {
+                        ShowChildrenVal = "0";
+                    }
+                    var enableProlaborateLink = "1";
+                    if ($("#enableDiagramLink").is(':checked')) {
+                        enableProlaborateLink = "1";
+                    }
+                    else {
+                        enableProlaborateLink = "0";
+                    }
+
+                    var Macrodata = {
+                        "body": {
+
+                            "Name": diagramName,
+                            "Type": "Diagram",
+                            "Guid": selectedGuid,
+                            "ShowChildren": ShowChildrenVal,
+                            "EnableLink": enableProlaborateLink
+
+                        }
+                    };
+
+                    return JSON.stringify(Macrodata.body);
+                }
+                else {
+                    var ErrorFlag = AP.flag.create({
+                        title: 'Macro Error',
+                        body: 'Please select any diagram.',
+                        type: 'warning'
+                    });
+
+                    setTimeout(function () { ErrorFlag.close(); }, 5000);
+
+                    return null;
+                }
+                break;
+            case "aui-uid-1":
+                if ($('.packageItem.dialog-active').length > 0) {
+
+                    var packageName = $('.packageItem.dialog-active').find('p.item-name').text();
+                    var selectedGuid = $('.packageItem.dialog-active').attr('data-guid');
+                    selectedGuid = selectedGuid.substring(1, 37);
+                    var ShowChildrenVal = "1";
+                    if ($("#showPackageChildren").is(':checked')) {
+                        ShowChildrenVal = "1";
+                    }
+                    else {
+                        ShowChildrenVal = "0";
+                    }
+                    var enableProlaborateLink = "1";
+                    if ($("#enablePackageChildLink").is(':checked')) {
+                        enableProlaborateLink = "1";
+                    }
+                    else {
+                        enableProlaborateLink = "0";
+                    }
+
+
+                    var Macrodata = {
+                        "body": {
+
+                            "Name": packageName,
+                            "Type": "Package",
+                            "Guid": selectedGuid,
+                            "ShowChildren": ShowChildrenVal,
+                            "EnableLink": enableProlaborateLink
+
+                        }
+                    };
+
+                    return JSON.stringify(Macrodata.body);
+                }
+                else {
+                    var ErrorFlag = AP.flag.create({
+                        title: 'Macro Error',
+                        body: 'Please select any package.',
+                        type: 'warning'
+                    });
+
+                    setTimeout(function () { ErrorFlag.close(); }, 5000);
+
+                    return null;
+                }
+                break;
+            case "aui-uid-2":
+                if ($('.elementItem.dialog-active').length > 0) {
+
+                    var elementName = $('.elementItem.dialog-active').find('p.item-name').text();
+                    var selectedGuid = $('.elementItem.dialog-active').attr('data-guid');
+                    selectedGuid = selectedGuid.substring(1, 37);
+
+                    var ShowChildrenVal = "1";
+                    if ($("#showElementChildren").is(':checked')) {
+                        ShowChildrenVal = "1";
+                    }
+                    else {
+                        ShowChildrenVal = "0";
+                    }
+                    var enableProlaborateLink = "1";
+                    if ($("#enableElementChildLink").is(':checked')) {
+                        enableProlaborateLink = "1";
+                    }
+                    else {
+                        enableProlaborateLink = "0";
+                    }
+
+                    var Macrodata = {
+                        "body": {
+
+                            "Name": elementName,
+                            "Type": "Element",
+                            "Guid": selectedGuid,
+                            "ShowChildren": ShowChildrenVal,
+                            "EnableLink": enableProlaborateLink
+
+                        }
+                    };
+
+                    return JSON.stringify(Macrodata.body);
+                }
+                else {
+                    var ErrorFlag = AP.flag.create({
+                        title: 'Macro Error',
+                        body: 'Please select any element.',
+                        type: 'warning'
+                    });
+
+                    setTimeout(function () { ErrorFlag.close(); }, 5000);
+
+                    return null;
+                }
+                break;
+            default:
+                return null;
+        }
+    }
+
+    $(function () {
+
+    //    AP.inlineDialog.hide();
+
+    //    console.log("Running awesome script.");
+       
+        //  Use the Connect JS API to pass current macro parameters.
+        AP.require(["confluence", "dialog"], function (confluence, dialog) {
+            
+            //  Latch onto the macro editor's 'submit' event.
+            dialog.getButton("submit").bind(function () {
+                var MacroData = getMacroData();
+                if (MacroData != null) {
+                    confluence.saveMacro({
+                        'prol': MacroData
+                    }, "Prolaborate");
+                }
+
+                confluence.closeMacroEditor();
+                return true;
+            });
+        });
+
+        
+
+    //    AP.getLocation(function (location) {
+    //        alert(location);
+    //    });
+
+    //    AP.context.getToken(function (token) {
+    //        console.log("JWT token string", token);
+    //    });
+
+    //    AP.context.getContext(function (response) {
+    //        console.log("Jira Issue Key", response.issue_key);
+    //        console.log("Confluence page id", response.pageId);
+    //        console.log("user account id (always present)", response.user.accountId);
+    //        console.log("license status (always present)", response.license);
+    //    });
+
+    //    // Display a nice green flag using the Flags JavaScript API.
+    //    var flag = AP.flag.create({
+    //        title: 'Successfully created a flag.',
+    //        body: 'This is a flag.',
+    //        type: 'success',
+    //        actions: {
+    //            'actionkey': 'Click me'
+    //        }
+    //    });
+
+        
+
+    });
+
+
+</script>
+

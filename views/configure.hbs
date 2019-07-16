@@ -1,0 +1,219 @@
+{{!< layout}}
+
+<div class="ac-content">
+    <input type="hidden" name="savedprotocol" id="savedprotocol" {{#if protocol}} value='{{protocol}}' {{/if}}  />
+</div>            
+
+    <form  action="#" method="post" class="aui">
+        <div class="field-group">
+            <label for="protocol">Protocol</label>
+            <select id="protocol" name="protocol" class="text" {{#if repository}}  disabled {{/if}}>
+            <option value="http">HTTP</option>
+            <option value="https">HTTPS</option>
+            </select>&nbsp;
+            <input type="button" id="editButton" value="Edit" class="button editButton" {{#if repository}} {{else}} style="display: none;" {{/if}}>
+        </div>
+        <div class="field-group">
+            <label for="name">Sever Name</label>
+            <input type="text" id="server" name="server" class="text" {{#if server}} value='{{server}}' disabled {{/if}}>
+        </div>
+        <div class="field-group">
+            <label for="time">Server Port</label>
+            <input type="text" id="port" name="port" class="text" {{#if port}} value='{{port}}' disabled {{/if}}>
+        </div>
+        <div class="field-group">
+            <label for="time">Token</label>
+            <input type="text" id="proltoken" name="proltoken" class="text" {{#if proltoken}} value='{{proltoken}}' disabled {{/if}} >
+        </div>
+        <div class="field-group" id="connectBlock"  {{#if repository}} style="display: none;"  {{else}}{{/if}}>
+            <input type="button" id="connectButton" value="Connect" class="button connectButton">
+        </div>
+        <div class="after-connection" id="chooseRepBlock" style="display:none">
+             <div class="field-group" style="display: block;">
+            <label for="repository">Choose Repository</label>
+            <select id="repository" name="repository" class="text"></select>
+        </div>
+        <div class="field-group" id="saveBlock" style="display: none;">
+            <button type="submit" id="saveButton" class="button"> Save</button>
+        </div>
+        </div>
+       
+    </form>  
+
+
+ 
+    <script>
+
+        var getQueryString = function (field, url) {
+            var href = url ? url : window.location.href;
+            var reg = new RegExp('[?&]' + field + '=([^&#]*)', 'i');
+            var string = reg.exec(href);
+            return string ? string[1] : null;
+        };
+
+        var BaseURL = "";
+
+        $(document).ready(function () {
+            var EncodedBaseURL = getQueryString('xdm_e', document.location);
+            BaseURL = decodeURIComponent(EncodedBaseURL);            
+            var protocolval = savedprotocol.value;
+            if (protocolval != '')
+                $("div.field-group select").val(protocolval);
+        });
+
+        $("#connectButton").click(function () {
+
+            $("#connectButton").attr('disabled', true);
+            $.ajax
+                ({
+                    type: "GET",
+                    url: "/prolconnect",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: 'protocol=' + $("#protocol").val() + '&server=' + $("#server").val() + '&port=' + $("#port").val() + '&proltoken=' + $("#proltoken").val() + '&baseURL=' + BaseURL,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        //xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
+                        //xhr.setRequestHeader ("X-Atlassian-Token", "no-check");
+                        //xhr.setRequestHeader ("Authorization",'JWT {{token}}');
+                    },
+                    success: function (response) {
+                        $("#connectButton").attr('disabled', false);
+                        // Display a nice green flag using the Flags JavaScript API.
+                        var ErrorFlag = AP.flag.create({
+                            title: 'Connection Successfull',
+                            type: 'success',
+                            body: 'Connection established successfully updated.'
+                        });
+
+                        setTimeout(function () { ErrorFlag.close(); }, 5000);
+
+                        getprolabrepositories();
+                        
+                    },
+                    error: function (xhr, errorText) {
+                        //alert("Connection Unsuccessfull");
+                        console.log(errorText);
+                        $("#connectButton").attr('disabled', false);
+                        // Display a error flag using the Flags JavaScript API.
+                        var ErrorFlag = AP.flag.create({
+                            title: 'Connection Unsuccessfull',
+                            body: 'Please check your configuration.',
+                            type: 'info'
+                        });
+
+                        setTimeout(function () { ErrorFlag.close(); }, 5000);
+
+                    }
+                });
+
+        }); 
+
+        function getprolabrepositories() {
+            $.ajax
+                ({
+                    type: "GET",
+                    url: "/getprolabrepositories",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: 'protocol=' + $("#protocol").val() + '&server=' + $("#server").val() + '&port=' + $("#port").val() + '&proltoken=' + $("#proltoken").val() + '&baseURL=' + BaseURL,
+                    async: false,
+                    beforeSend: function (xhr) {
+                        //xhr.setRequestHeader ("Authorization", "Basic " + btoa(username + ":" + password));
+                        //xhr.setRequestHeader ("X-Atlassian-Token", "no-check");
+                        //xhr.setRequestHeader ("Authorization",'JWT {{token}}');
+                    },
+                    success: function (response) {
+                        $("#connectButton").attr('disabled', false);
+                        // Display a nice green flag using the Flags JavaScript API.
+                       
+                        var repositories = response.d.repositoryList;
+                        var optionHtml = "";
+                        $.each(repositories, function (index, val) {
+                            var selected = "";
+                            if (typeof (repository) != "undefined" && repository.value != "" && val.RepositoryId == repository.value) {
+                                selected = "selected";
+                            }
+                            else {
+                                selected = "";
+                            }
+                            optionHtml += "<option value = '" + val.RepositoryId + "' " + selected + ">" + val.RepositoryName + "</option>";
+                        });
+                        $("#repository").html('');//RZN
+                        $("#repository").append(optionHtml);
+                        $("#repository").attr('disabled', false);
+
+                        $("#saveBlock").show();
+                        $("#chooseRepBlock").show();
+                        $("#connectBlock").hide();
+
+                        setWindowHeight();
+                    },
+                    error: function (xhr, errorText) {
+                        //alert("Connection Unsuccessfull");
+                        console.log(errorText);
+                        $("#connectButton").attr('disabled', false);
+                        // Display a error flag using the Flags JavaScript API.
+                        
+
+                    }
+                });
+        }
+
+        $("#editButton").click(function () {
+            $("#saveBlock").hide();
+            $("#editButton").hide();
+            $("#chooseRepBlock").hide();
+
+            $("#protocol").attr('disabled', false);
+            $("#server").attr('disabled', false);
+            $("#port").attr('disabled', false);
+            $("#proltoken").attr('disabled', false);
+
+            //$("#repository").html('');
+            $("#connectBlock").show();
+
+            setWindowHeight();
+        }); 
+
+        $("form").submit(function (e) {
+
+            e.preventDefault(); // Prevents the page from refreshing
+            var $this = $(this); // `this` refers to the current form element
+            $.post(
+                $this.attr("action"), // Gets the URL to sent the post to
+                $this.serialize(), // Serializes form data in standard format
+                function (data) { /** code to handle response **/
+                    //alert("Response");
+                },
+                "json" // The format the response should be in
+            );
+
+            $("#saveBlock").show();
+            $("#editButton").show();
+
+            $("#protocol").attr('disabled', true);
+            $("#server").attr('disabled', true);
+            $("#port").attr('disabled', true);
+            $("#proltoken").attr('disabled', true);
+            $("#repository").attr('disabled', true);
+
+            $("#cancelBlock").hide();
+
+            var SaveFlag = AP.flag.create({
+                title: 'Saved Successfully',
+                type: 'success',
+                body: 'Configuration updated successfully.'
+            });
+
+            setTimeout(function () { SaveFlag.close(); }, 5000);
+
+        });
+
+        function setWindowHeight() {
+            var windowHeight = window.innerHeight;
+            document.body.style.height = windowHeight + "px";
+        }
+    </script>
+
+ 

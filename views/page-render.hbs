@@ -1,0 +1,22 @@
+{{!< layout}}
+
+<div class="ac-content">    
+        {{{htmlCon}}}    
+</div>
+<!--<iframe src="https://rizan.atlassian.net/" noborder="0" width="830" height="800" scrolling="yes" seamless></iframe>-->
+<script>
+
+    $(document).ready(function () {
+
+        getProlHTML();
+        AP.confluence.getMacroData(function (data) {
+            alert(data);
+        });
+    });
+
+    function getProlHTML() {
+
+
+    }
+
+</script>

@@ -1,0 +1,76 @@
+{
+    "key": "prolaborate-addon",
+    "name": "Prolaborte",
+    "description": "Prolaborate plugin for confluence cloud",
+  "vendor": {
+    "name": "Sparx Systems Prolaborate",
+    "url": "https://prolaborate.sparxsystems.com/"
+  },
+    "baseUrl": "{{localBaseUrl}}",
+    "links": {
+        "self": "{{localBaseUrl}}/atlassian-connect.json",
+        "homepage": "{{localBaseUrl}}/atlassian-connect.json"
+    },
+    "authentication": {
+        "type": "jwt"
+    },
+    "lifecycle": {
+        "installed": "/installed"
+    },
+    "scopes": [
+        "READ"
+    ],
+    "modules": {
+		"configurePage": {
+		  "url": "/configure",
+		  "name": {
+			"value": "Prolaborate Configuration"
+		  },
+		  "key": "prol-config-page"
+		},
+		"dynamicContentMacros": [
+      {
+
+        "url": "/page-render?prolMacro={prol}",
+        "description": {
+          "value": "Prolaborate is the sharing and Collaboration software for Enterprise Architect"
+        },
+        
+        "outputType": "block",
+        "icon": {
+          "width": 72,
+          "height": 72,
+          "url": "/images/icon.png"
+        },
+
+        "bodyType": "none",
+        "aliases": [
+          "prol"
+        ],
+        "featured": true,
+
+
+        "editor": {
+
+          "width": "800px",
+          "height": "64%",
+
+          "url": "/select-item",
+          "editTitle": {
+            "value": "Edit Prolaborate macro"
+          },
+          "insertTitle": {
+            "value": "Insert Prolaborate macro"
+          }
+        },
+        "name": {
+          "value": "Prolaborate"
+        },
+        "key": "prolaborate-macro"
+      }
+    ]
+    },
+    "apiMigrations": {
+        "gdpr": true
+    }
+}
